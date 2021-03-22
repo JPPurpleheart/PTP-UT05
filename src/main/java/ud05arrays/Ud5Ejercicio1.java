@@ -3,6 +3,8 @@
  */
 package ud05arrays;
 
+import helpers.Helper;
+
 /**
  * @author eserrano
  *
@@ -48,9 +50,19 @@ public class Ud5Ejercicio1 {
 	 * @param datosBolas datos de las bolas en array bidimensional de 
 	 * numero de filas variable y longitud de columnas = 2
 	 * @return Nuevo array con las Bolas creadas.
+	 * -----------------------------------------o-----------------------------------------
+	 * Los tipos de datos primitivos se pasan por copia se pasan y se duplica el valor
+	 * pudiendo cambiar el valor en uno de los dos lugares pero no en los dos.
+	 * Los objetos se pasan por copia del valor de la dirección (referencia) y no se
+	 * duplica el valor pudiendo cambiar el valor en los dos sitios al mismo
+	 * tiempo puesto que apuntan a la misma dirección en memoria.
 	 */
 	public static Bola[] crearBolas(float[][] datosBolas) {
-		return null;
+		Bola[] retorno = new Bola[datosBolas.length];
+		int i =-1;
+		for (float[] fs: datosBolas)
+			retorno[++i]=new Bola(fs[0],fs[1]);
+		return retorno;
 	}
 	
 
@@ -65,7 +77,8 @@ public class Ud5Ejercicio1 {
 	public static void imprimeBolas(Bola[] array, String titulo) {
 		System.out.println(titulo + ": --------------------");
 		
-		//TODO sobrescribe el comentario para hacer lo que el metodo pide
+		for(Bola bola: array)
+			System.out.println(bola);
 		
 		System.out.println("-----------------------------");
 	}
@@ -81,10 +94,18 @@ public class Ud5Ejercicio1 {
 	 * 
 	 * @param array A clonar y ordenar
 	 * @return copia ordenada del array pasado como parametro
+	 * final es inmutable mientras static es mutable y accesible por todos los metodos de la clase.
 	 */
 	public static Bola[] ordena(final Bola[] array) {
-		
-		return null;
+		Bola[] retorno=array.clone();
+		for(int i = 0; i < retorno.length; i++) {
+			for(int j = 0; j < retorno.length; j++) {
+				if(retorno[i].compareTo(retorno[j]) > 0) {
+					Helper.swap(retorno, i, j);
+				}
+			}
+		}
+		return retorno;
 	}
 	
 	/**
@@ -103,7 +124,25 @@ public class Ud5Ejercicio1 {
 	 * @return nuevo array con los elementos no eliminados.
 	 */
 	public static Bola[] eliminaBolas(float diametro, float peso,final Bola[] array) {
-		return null;
+		Bola[] retorno=array.clone();
+		Bola recibida=new Bola(diametro, peso);
+		int borrados=0;
+		for(int i = 0; i < retorno.length; i++) {
+			if(recibida.equals(retorno[i])) {
+				retorno[i]=null;
+				borrados++;
+			}
+		}
+		Bola []nuevo = new Bola[retorno.length-borrados];
+		
+		int j=0;
+		for(int i = 0; i < retorno.length; i++) {
+			if(retorno[i]!=null)
+				nuevo[j++]=retorno[i];
+		}
+		
+		
+		return nuevo;
 	}
 	
 	

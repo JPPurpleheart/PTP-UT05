@@ -37,8 +37,11 @@ public class Ud5Ejercicio2 {
 	 * @return el array con todos los terminos de fibonacci calculados para cada posicion
 	 */
 	public static long [] fibonacci (int terminos) {;
-		
-		return null;
+		long[] retorno=new long[terminos];
+		for(int i =0; i < retorno.length; i++) {
+			retorno[i]=fibo(i);
+		}
+		return retorno;
 	}
 	
 	/**
@@ -53,8 +56,17 @@ public class Ud5Ejercicio2 {
 	 * @return valor del termino en la sucesion de Fibonacci
 	 */
 	public static long fibo(int enesimo) {
-		
-		return -1;
+		long retorno=-1;
+		if (enesimo==0) {
+			retorno=0;
+		}else if (enesimo==1)  {
+			retorno=1;
+		} else if(enesimo>1)  {
+			retorno=fibo(enesimo-2)+fibo(enesimo-1);
+		} else  {
+			System.out.println("Error");
+		}
+		return retorno;
 	}
 
 }
